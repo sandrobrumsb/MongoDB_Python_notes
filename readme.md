@@ -14,6 +14,10 @@ Para usar o MongoDB com Python, você precisa instalar a biblioteca PyMongo:
 python -m pip install pymongo
 ```
 
+## MongoDB Compass
+
+Manipule seu banco de dados facilmente com o Compass, a interface gráfica do usuário (GUI) para MongoDB.
+
 ## Conteúdo Estudado
 
 ### 1. Conexão com MongoDB
