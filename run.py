@@ -1,23 +1,85 @@
 # Importando a classe DBconnectionHandler, que gerencia a conexão com o banco de dados MongoDB
 from models.connection_options.connection import DBconnectionHandler
+from models.repository.minhaCollection_repository import MinhaCollectionRepository
 
-# Criando uma instância da classe DBconnectionHandler para gerenciar a conexão
+# Criando uma instância da classe DBconnectionHandler para gerenciar a conexão:
 db_handle = DBconnectionHandler()
 
-# Obtendo a conexão do banco de dados (ainda não conectada, pois o método connect_to_db não foi chamado)
-conn1 = db_handle.get_db_connecion()
-print(conn1)  # neste momento, é uma conexão não estabelecida)
-
-# Estabelecendo a conexão com o banco de dados MongoDB chamando o método connect_to_db
+# Estabelecendo a conexão com o banco de dados MongoDB chamando o método connect_to_db:
 db_handle.connect_to_db()
-conn2 = db_handle.get_db_connecion()  # Obtendo a conexão conectada ao banco de dados
-print(conn2)
+db_connection = db_handle.get_db_connecion()  # Obtendo a conexão  ao banco de dados
+# print(db_connection)
 
-# pegando a coleção dentro do banco chamada minhaCollection:
-collection = conn2.get_collection("minhaCollection")
+minhaCollection_repository = MinhaCollectionRepository(db_connection)
 
-# Fazendo uma inserção:
-collection.insert_one({
-    "estou": "inserindo",
-    "numeros":[123,456,789,101112]
-})
+# minhaCollection_repository.edit_registry("Sandro SB")
+# ------------------------------------------------------------------
+
+"""filtro ={"profissao" : "Desenvolvedor"}
+propriedades={"profissao" : "Software Developer","apelido" : "Dev"}
+
+# Incrementando mais um dados( "idade") nas propriedades que tem {"profissao":"Software Developer"}:
+filtro ={"profissao" : "Software Developer"}
+propriedades={"idade" : 37}
+
+minhaCollection_repository.edit_many_registries(filtro,propriedades)"""
+
+# ------------------------------------------------------------------
+# Aumentando 3 anos na idade:
+#minhaCollection_repository.edit_many_increment(3) 
+# ------------------------------------------------------------------
+#Decrementando 10 anos de idade:
+#minhaCollection_repository.edit_many_increment(-10) 
+# ------------------------------------------------------------------
+#minhaCollection_repository.delet_many_registries()
+minhaCollection_repository.delet_one_registry()
+
+"""
+# Buscando múltiplos documentos com o filtro name = "Sandro":
+response = minhaCollection_repository.select_many({"name": "Sandro"})
+print(response)
+print()
+# Buscando um único documento com o filtro name = "Sandro":
+response2 = minhaCollection_repository.select_one({"name": "Sandro"})
+print(response2)
+print()
+# Busca documentos onde uma propriedade específica existe na coleção:
+minhaCollection_repository.select_if_property_exists()
+# ------------------------------------------------------------------
+# Busca múltiplos documentos com ordenação aplicada:
+minhaCollection_repository.select_many_order()
+# ------------------------------------------------------------------
+# Busca documentos usando operador OR (retorna registros que atendem uma OU outra condição):
+minhaCollection_repository.select_or()
+# ------------------------------------------------------------------
+# Busca documentos pelo seu ObjectId (identificador único do MongoDB):
+minhaCollection_repository.select_by_object_id()
+"""
+
+"""
+# Realizando inserção de listas de documentos:
+
+Order = {
+    "name": "Sandro",
+    "Endereço": "Konoha",
+    "Pedidos": {"Sushi": 30, "Refrigerante": 2},
+}
+
+minhaCollection_repository.insert_document(Order)
+
+
+list_of_documents = [
+    {"Capitao": "Luffy"},
+    {"Navegadora": "Nami"},
+    {"Atirador": "Usopp"},
+    {"Imediato": "Zoro"},
+    {"Cozinheiro": "Sanji"},
+    {"Historiadora": "Robin"},
+    {"Medico": "Chopper"},
+    {"Carpinteiro": "Franky"},
+    {"Musico": "Brook"},
+    {"Timoneiro": "Jimbei"},
+]
+
+minhaCollection_repository.insert_list_of_documents(list_of_documents)
+"""
