@@ -1,0 +1,98 @@
+# Sistema operacional
+#########################
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Linux
+*~
+
+# Arquivos de configuração do editor
+#########################
+.vscode/          # Configuração do Visual Studio Code
+.idea/            # Configuração do IntelliJ, PhpStorm, etc.
+*.sublime-workspace
+*.sublime-project
+*.swp              # Arquivos temporários do vim
+
+# Dependências de pacotes
+#########################
+node_modules/     # Dependências do Node.js
+bower_components/ # Dependências do Bower
+vendor/           # Dependências do Composer (PHP), ou outros gerenciadores de pacotes
+
+# Arquivos de build (arquivos gerados)
+#########################
+/dist/            # Build de produção (geralmente em JS, CSS, etc.)
+/build/           # Arquivos de build (geralmente usados em frameworks)
+public/assets/    # Arquivos estáticos gerados em alguns projetos
+
+# Arquivos de log
+#########################
+*.log             # Arquivos de log, geralmente grandes e irrelevantes para o código-fonte
+
+# Arquivos temporários de editores e IDEs
+#########################
+*.swp             # Arquivos temporários do Vim
+*.bak             # Arquivos de backup de editores
+*.tmp             # Arquivos temporários
+
+# Arquivos de configuração local (ambiente de desenvolvimento)
+#########################
+.env              # Arquivo de variáveis de ambiente (contém senhas, chaves, etc.)
+.env.local        # Configurações locais do ambiente de desenvolvimento
+*.local           # Arquivos locais específicos
+
+# Arquivos de compilação
+#########################
+*.o               # Arquivos objeto
+*.out             # Arquivos de compilação
+*.a               # Arquivos de bibliotecas estáticas
+*.so              # Arquivos de bibliotecas compartilhadas
+
+# Arquivos executáveis
+#########################
+*.exe             # Arquivos executáveis
+*.dll             # Arquivos DLL (no Windows)
+*.app             # Arquivos de aplicação no macOS
+*.msi             # Arquivos de instalação no Windows
+
+# Arquivos específicos do Git
+#########################
+.git/             # Diretório de configuração do Git
+.gitmodules       # Arquivo de configuração de submódulos
+
+# Arquivos de cache
+#########################
+*.cache           # Arquivos de cache de editores, ferramentas de build, etc.
+
+# Outros
+#########################
+*.pid             # Arquivos de processo (gerados por alguns servidores)
+*.log             # Arquivos de log de servidores
+npm-debug.log     # Arquivo de log do npm
+yarn-debug.log    # Arquivo de log do yarn
+yarn-error.log    # Arquivo de erro do yarn
+
+# Arquivos específicos de frameworks
+#########################
+# Node.js
+npm-debug.log
+
+# Ruby
+*.gem
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear

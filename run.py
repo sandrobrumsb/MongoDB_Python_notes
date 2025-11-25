@@ -2,6 +2,8 @@
 from models.connection_options.connection import DBconnectionHandler
 from models.repository.minhaCollection_repository import MinhaCollectionRepository
 
+from datetime import datetime, timedelta
+
 # Criando uma instância da classe DBconnectionHandler para gerenciar a conexão:
 db_handle = DBconnectionHandler()
 
@@ -12,53 +14,17 @@ db_connection = db_handle.get_db_connecion()  # Obtendo a conexão  ao banco de 
 
 minhaCollection_repository = MinhaCollectionRepository(db_connection)
 
-# minhaCollection_repository.edit_registry("Sandro SB")
-# ------------------------------------------------------------------
+# ==================== OPERAÇÕES DE INSERÇÃO ====================
 
-"""filtro ={"profissao" : "Desenvolvedor"}
-propriedades={"profissao" : "Software Developer","apelido" : "Dev"}
+# Realizando inserção de um documento:
+documento = {
+    "nome": "Namikaze Minato",
+    "idade": 30,
+    "data_de_criacao": datetime.utcnow() - timedelta(hours=3),
+}
+minhaCollection_repository.insert_document(documento)
 
-# Incrementando mais um dados( "idade") nas propriedades que tem {"profissao":"Software Developer"}:
-filtro ={"profissao" : "Software Developer"}
-propriedades={"idade" : 37}
-
-minhaCollection_repository.edit_many_registries(filtro,propriedades)"""
-
-# ------------------------------------------------------------------
-# Aumentando 3 anos na idade:
-#minhaCollection_repository.edit_many_increment(3) 
-# ------------------------------------------------------------------
-#Decrementando 10 anos de idade:
-#minhaCollection_repository.edit_many_increment(-10) 
-# ------------------------------------------------------------------
-#minhaCollection_repository.delet_many_registries()
-minhaCollection_repository.delet_one_registry()
-
-"""
-# Buscando múltiplos documentos com o filtro name = "Sandro":
-response = minhaCollection_repository.select_many({"name": "Sandro"})
-print(response)
-print()
-# Buscando um único documento com o filtro name = "Sandro":
-response2 = minhaCollection_repository.select_one({"name": "Sandro"})
-print(response2)
-print()
-# Busca documentos onde uma propriedade específica existe na coleção:
-minhaCollection_repository.select_if_property_exists()
-# ------------------------------------------------------------------
-# Busca múltiplos documentos com ordenação aplicada:
-minhaCollection_repository.select_many_order()
-# ------------------------------------------------------------------
-# Busca documentos usando operador OR (retorna registros que atendem uma OU outra condição):
-minhaCollection_repository.select_or()
-# ------------------------------------------------------------------
-# Busca documentos pelo seu ObjectId (identificador único do MongoDB):
-minhaCollection_repository.select_by_object_id()
-"""
-
-"""
 # Realizando inserção de listas de documentos:
-
 Order = {
     "name": "Sandro",
     "Endereço": "Konoha",
@@ -66,7 +32,6 @@ Order = {
 }
 
 minhaCollection_repository.insert_document(Order)
-
 
 list_of_documents = [
     {"Capitao": "Luffy"},
@@ -82,4 +47,56 @@ list_of_documents = [
 ]
 
 minhaCollection_repository.insert_list_of_documents(list_of_documents)
-"""
+
+# ==================== OPERAÇÕES DE CONSULTA ====================
+
+# Buscando um único documento com o filtro name = "Sandro":
+response2 = minhaCollection_repository.select_one({"name": "Sandro"})
+print(response2)
+print()
+
+# Buscando múltiplos documentos com o filtro name = "Sandro":
+response = minhaCollection_repository.select_many({"name": "Sandro"})
+print(response)
+print()
+
+# Busca documentos onde uma propriedade específica existe na coleção:
+minhaCollection_repository.select_if_property_exists()
+
+# Busca múltiplos documentos com ordenação aplicada:
+minhaCollection_repository.select_many_order()
+
+# Busca documentos usando operador OR (retorna registros que atendem uma OU outra condição):
+minhaCollection_repository.select_or()
+
+# Busca documentos pelo seu ObjectId (identificador único do MongoDB):
+minhaCollection_repository.select_by_object_id()
+
+# ==================== OPERAÇÕES DE ATUALIZAÇÃO ====================
+
+minhaCollection_repository.edit_registry("Sandro SB")
+
+filtro = {"profissao": "Desenvolvedor"}
+propriedades = {"profissao": "Software Developer", "apelido": "Dev"}
+
+# Incrementando mais um dados( "idade") nas propriedades que tem {"profissao":"Software Developer"}:
+filtro = {"profissao": "Software Developer"}
+propriedades = {"idade": 37}
+
+minhaCollection_repository.edit_many_registries(filtro, propriedades)
+
+# Aumentando 3 anos na idade:
+minhaCollection_repository.edit_many_increment(3)
+
+# Decrementando 10 anos de idade:
+minhaCollection_repository.edit_many_increment(-10)
+
+# ==================== OPERAÇÕES DE EXCLUSÃO ====================
+
+minhaCollection_repository.delet_one_registry()
+
+minhaCollection_repository.delet_many_registries()
+
+# ==================== OPERAÇÕES DE ÍNDICE ====================
+
+minhaCollection_repository.create_index_ttl()
