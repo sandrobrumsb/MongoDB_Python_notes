@@ -23,7 +23,6 @@ Manipule seu banco de dados facilmente com o Compass, a interface gráfica do us
 ### 1. Conexão com MongoDB
 
 - Estabelecimento de conexão com servidor MongoDB local
-- Uso da URL padrão `mongodb://localhost:27017/`
 
 ### 2. Gerenciamento de Banco de Dados
 
